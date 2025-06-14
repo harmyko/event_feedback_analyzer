@@ -13,28 +13,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/events")
 public class EventController {
-    private final EventService service;
+    private final EventService eventService;
 
     @Autowired
-    public EventController(EventService service) {
-        this.service = service;
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
     }
 
     @PostMapping
     public ResponseEntity<EventResponse> createEvent(@RequestBody CreateEventRequest request) {
-        EventResponse response = service.createEvent(request);
+        EventResponse response = eventService.createEvent(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<EventResponse>> getAllEvents() {
-        List<EventResponse> events = service.getAllEvents();
+        List<EventResponse> events = eventService.getAllEvents();
         return ResponseEntity.ok(events);
     }
 
     @GetMapping("/{eventId}")
     public ResponseEntity<EventResponse> getEventById(@PathVariable Long eventId) {
-        EventResponse event = service.getEventById(eventId);
+        EventResponse event = eventService.getEventById(eventId);
         return ResponseEntity.ok(event);
     }
 }

@@ -3,7 +3,6 @@ package com.eventsync.dto;
 public class CreateEventRequest {
 
     private String title;
-
     private String description;
 
     public CreateEventRequest() {

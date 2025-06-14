@@ -12,8 +12,6 @@ public class EventResponse {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
-    private int feedbackCount;
-
     public EventResponse() {}
 
     public EventResponse(Long id, String title, String description, LocalDateTime createdAt) {
@@ -21,15 +19,6 @@ public class EventResponse {
         this.title = title;
         this.description = description;
         this.createdAt = createdAt;
-        this.feedbackCount = 0;
-    }
-
-    public EventResponse(Long id, String title, String description, LocalDateTime createdAt, int feedbackCount) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.createdAt = createdAt;
-        this.feedbackCount = feedbackCount;
     }
 
     public Long getId() {
