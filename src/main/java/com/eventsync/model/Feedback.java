@@ -14,7 +14,7 @@ public class Feedback {
     private Long id;
 
     @Column(nullable = false)
-    private long eventId;
+    private Long eventId;
 
     @Column(nullable = false)
     private String username;

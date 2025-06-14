@@ -2,7 +2,7 @@ package com.eventsync.dto;
 
 public class CreateFeedbackRequest {
 
-    private long eventId;
+    private Long eventId;
     private String username;
     private String content;
 
