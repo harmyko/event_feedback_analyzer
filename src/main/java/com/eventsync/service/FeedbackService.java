@@ -26,11 +26,10 @@ public class FeedbackService {
                 eventId, request.getUsername(), request.getContent()
         );
 
-        feedback.setSentiment("Pending...");
-        Feedback saved = feedbackRepository.save(feedback);
+        String sentiment = sentimentService.analyzeSentiment(feedback.getContent());
+        feedback.setSentiment(sentiment);
 
-        // TODO: Analyze the sentiment in the background
-        // processSentimentAsync(saved.getId());
+        Feedback saved = feedbackRepository.save(feedback);
 
         return convertToResponse(saved);
     }
