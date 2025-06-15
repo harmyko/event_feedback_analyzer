@@ -1,10 +1,13 @@
 package com.eventsync.service;
 
+import com.eventsync.dto.EventResponse;
 import com.eventsync.dto.EventSentimentSummary;
 import com.eventsync.dto.FeedbackResponse;
 import com.eventsync.dto.CreateFeedbackRequest;
 import com.eventsync.model.Feedback;
+import com.eventsync.repository.EventRepository;
 import com.eventsync.repository.FeedbackRepository;
+import com.eventsync.exception.EventNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +18,21 @@ import java.util.stream.Collectors;
 @Service
 public class FeedbackService {
     private final FeedbackRepository feedbackRepository;
+    private final EventRepository eventRepository;
     private final SentimentService sentimentService;
 
     @Autowired
-    public FeedbackService(FeedbackRepository feedbackRepository, SentimentService sentimentService) {
+    public FeedbackService(FeedbackRepository feedbackRepository, SentimentService sentimentService, EventRepository eventRepository) {
         this.feedbackRepository = feedbackRepository;
+        this.eventRepository = eventRepository;
         this.sentimentService = sentimentService;
     }
 
     public FeedbackResponse createFeedback(Long eventId, CreateFeedbackRequest request) {
+        if(!eventRepository.existsById(eventId)) {
+            throw new EventNotFoundException("Event with provided ID does not exist");
+        }
+
         Feedback feedback = new Feedback(
                 eventId, request.getUsername(), request.getContent()
         );
