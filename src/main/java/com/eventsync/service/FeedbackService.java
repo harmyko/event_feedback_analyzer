@@ -1,5 +1,6 @@
 package com.eventsync.service;
 
+import com.eventsync.dto.EventSentimentSummary;
 import com.eventsync.dto.FeedbackResponse;
 import com.eventsync.dto.CreateFeedbackRequest;
 import com.eventsync.model.Feedback;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +28,7 @@ public class FeedbackService {
                 eventId, request.getUsername(), request.getContent()
         );
 
+        // TODO: analyze sentiment asynchronously for better user experience
         String sentiment = sentimentService.analyzeSentiment(feedback.getContent());
         feedback.setSentiment(sentiment);
 
@@ -53,4 +56,36 @@ public class FeedbackService {
     }
 
 
+    public EventSentimentSummary getEventSentimentSummary(Long eventId) {
+        List<Feedback> feedbacks = feedbackRepository.findByEventId(eventId);
+
+        Map<String, Long> sentimentCount = feedbacks.stream()
+                .collect(Collectors.groupingBy(
+                        feedback -> feedback.getSentiment() != null ? feedback.getSentiment() : "NEUTRAL",
+                        Collectors.counting()
+                ));
+
+        long totalFeedback = feedbacks.size();
+        long positiveCount = sentimentCount.getOrDefault("POSITIVE", 0L);
+        long neutralCount = sentimentCount.getOrDefault("NEUTRAL", 0L);
+        long negativeCount = sentimentCount.getOrDefault("NEGATIVE", 0L);
+
+        return new EventSentimentSummary(
+                eventId,
+                totalFeedback,
+                positiveCount,
+                neutralCount,
+                negativeCount,
+                calculatePercentage(positiveCount, totalFeedback),
+                calculatePercentage(neutralCount, totalFeedback),
+                calculatePercentage(negativeCount, totalFeedback)
+        );
+    }
+
+    private double calculatePercentage(long positiveCount, long totalFeedback) {
+        if (totalFeedback == 0) {
+            return 0.0;
+        }
+        return Math.round((positiveCount * 100.0 / totalFeedback) * 100.0) / 100.0;
+    }
 }
