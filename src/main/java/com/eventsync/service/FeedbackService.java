@@ -74,10 +74,10 @@ public class FeedbackService {
                         Collectors.counting()
                 ));
 
-        long totalFeedback = feedbacks.size();
-        long positiveCount = sentimentCount.getOrDefault("POSITIVE", 0L);
-        long neutralCount = sentimentCount.getOrDefault("NEUTRAL", 0L);
-        long negativeCount = sentimentCount.getOrDefault("NEGATIVE", 0L);
+        Long totalFeedback = (long) feedbacks.size();
+        Long positiveCount = sentimentCount.getOrDefault("POSITIVE", 0L);
+        Long neutralCount = sentimentCount.getOrDefault("NEUTRAL", 0L);
+        Long negativeCount = sentimentCount.getOrDefault("NEGATIVE", 0L);
 
         return new EventSentimentSummary(
                 eventId,
@@ -91,7 +91,7 @@ public class FeedbackService {
         );
     }
 
-    private double calculatePercentage(long positiveCount, long totalFeedback) {
+    private double calculatePercentage(Long positiveCount, Long totalFeedback) {
         if (totalFeedback == 0) {
             return 0.0;
         }

@@ -22,13 +22,13 @@ public class FeedbackController {
     @PostMapping
     public ResponseEntity<FeedbackResponse> addFeedback(
             @PathVariable Long eventId, @RequestBody CreateFeedbackRequest request) {
-
         FeedbackResponse response = feedbackService.createFeedback(eventId, request);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public ResponseEntity<List<FeedbackResponse>> getEventFeedback(@PathVariable Long eventId) {
+    public ResponseEntity<List<FeedbackResponse>> getEventFeedback(
+            @PathVariable Long eventId) {
         List<FeedbackResponse> response = feedbackService.getEventFeedback(eventId);
         return ResponseEntity.ok(response);
     }

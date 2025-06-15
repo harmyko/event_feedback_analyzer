@@ -91,10 +91,10 @@ public class Feedback {
     public String toString() {
         return "Feedback{" +
                 "id=" + id +
-                ", eventId=" + eventId + '\'' +
-                ", username='" + username + '\'' +
-                ", content='" + content + '\'' +
-                ", sentiment='" + sentiment + '\'' +
+                ", eventId=" + eventId +
+                ", username='" + username +
+                ", content='" + content +
+                ", sentiment='" + sentiment +
                 ", createdAt=" + createdAt +
                 '}';
     }

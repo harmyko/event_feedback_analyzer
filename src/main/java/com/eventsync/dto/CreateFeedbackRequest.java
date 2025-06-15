@@ -6,14 +6,7 @@ public class CreateFeedbackRequest {
     private String username;
     private String content;
 
-    public CreateFeedbackRequest() {
-    }
-
-    public CreateFeedbackRequest(Long eventId, String username, String content) {
-        this.eventId = eventId;
-        this.username = username;
-        this.content = content;
-    }
+    public CreateFeedbackRequest() {}
 
     public Long getEventId() {
         return eventId;
@@ -42,8 +35,8 @@ public class CreateFeedbackRequest {
     @Override
     public String toString() {
         return "CreateFeedbackRequest{" +
-                "eventId='" + eventId + '\'' +
-                ", username='" + username + '\'' +
+                "eventId='" + eventId +
+                ", username='" + username +
                 ", content='" + content +
                 '}';
     }

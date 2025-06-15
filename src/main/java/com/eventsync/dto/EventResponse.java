@@ -57,8 +57,8 @@ public class EventResponse {
     public String toString() {
         return "EventResponse{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
+                ", title='" + title +
+                ", description='" + description +
                 ", createdAt=" + createdAt +
                 '}';
     }

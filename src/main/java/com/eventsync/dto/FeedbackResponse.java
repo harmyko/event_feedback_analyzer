@@ -1,5 +1,6 @@
 package com.eventsync.dto;
 
+import com.eventsync.model.Feedback;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,8 @@ public class FeedbackResponse {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
+
+    public FeedbackResponse() {}
 
     public FeedbackResponse(Long id, Long eventId, String username, String content, String sentiment, LocalDateTime createdAt) {
         this.id = id;
@@ -77,8 +80,8 @@ public class FeedbackResponse {
         return "FeedbackResponse{" +
                 "id=" + id +
                 ", eventId=" + eventId +
-                ", username='" + username + '\'' +
-                ", content='" + content + '\'' +
+                ", username='" + username +
+                ", content='" + content +
                 ", createdAt=" + createdAt +
                 '}';
     }

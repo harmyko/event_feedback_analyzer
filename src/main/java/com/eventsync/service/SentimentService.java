@@ -44,19 +44,16 @@ public class SentimentService {
         }
 
         try {
-            // Prepare request headers
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setAccept(List.of(MediaType.APPLICATION_JSON));
             headers.setBearerAuth(apiToken);
 
-            // Prepare request body
             Map<String, String> requestBody = new HashMap<>();
             requestBody.put("inputs", text);
 
             HttpEntity<Map<String, String>> entity = new HttpEntity<>(requestBody, headers);
 
-            // Make API call
             ResponseEntity<String> response = restTemplate.exchange(
                     HUGGING_FACE_API_URL,
                     HttpMethod.POST,
@@ -84,7 +81,6 @@ public class SentimentService {
         try {
             JsonNode jsonResponse = objectMapper.readTree(responseBody);
 
-            // Handle case where response is an array
             if (jsonResponse.isArray() && !jsonResponse.isEmpty()) {
                 JsonNode firstResult = jsonResponse.get(0);
                 if (firstResult.isArray() && !firstResult.isEmpty()) {

@@ -5,13 +5,7 @@ public class CreateEventRequest {
     private String title;
     private String description;
 
-    public CreateEventRequest() {
-    }
-
-    public CreateEventRequest(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
+    public CreateEventRequest() {}
 
     public String getTitle() {
         return title;
@@ -32,8 +26,8 @@ public class CreateEventRequest {
     @Override
     public String toString() {
         return "CreateEventRequest{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
+                "title='" + title +
+                ", description='" + description +
                 '}';
     }
 }

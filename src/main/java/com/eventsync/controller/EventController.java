@@ -25,7 +25,8 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventResponse> createEvent(@RequestBody CreateEventRequest request) {
+    public ResponseEntity<EventResponse> createEvent(
+            @RequestBody CreateEventRequest request) {
         EventResponse response = eventService.createEvent(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -37,13 +38,15 @@ public class EventController {
     }
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<EventResponse> getEventById(@PathVariable Long eventId) {
+    public ResponseEntity<EventResponse> getEventById(
+            @PathVariable Long eventId) {
         EventResponse event = eventService.getEventById(eventId);
         return ResponseEntity.ok(event);
     }
 
     @GetMapping("/{eventId}/summary")
-    public ResponseEntity<EventSentimentSummary> getEventSummary(@PathVariable Long eventId) {
+    public ResponseEntity<EventSentimentSummary> getEventSummary(
+            @PathVariable Long eventId) {
         eventService.getEventById(eventId);
 
         EventSentimentSummary summary = feedbackService.getEventSentimentSummary(eventId);
