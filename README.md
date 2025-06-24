@@ -179,9 +179,7 @@ eventsync/
 **Potential improvements for deployment:**
 - [ ] User authentication and authorization
 - [ ] Asynchronous sentiment analysis processing
-- [ ] Data persistence (PostgreSQL/MySQL)
-- [ ] Cloud deployment
 - [ ] API rate limiting
-- [ ] Enhanced error handling and logging
+- [ ] Enhanced error handling
 
 # Have fun!
